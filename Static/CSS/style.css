@@ -182,10 +182,10 @@ h1{
     width: 95%;
     height: 80%;
     /* border: #000 1px solid; */
-    display: flex;
-    flex-direction: column;
+    /* display: flex; */
+    /* flex-direction: column;
     justify-content: space-around;
-    align-items: center;
+    align-items: center; */
 
 }
 .container-magasin .ajoute{
@@ -206,7 +206,7 @@ h1{
     height: 100%;
 }
 .container-magasin .ajoute a btn-lg{
-    padding: 0 18px!important;
+    padding: 0 18px !important;
 }
 .container-magasin .titre {
     display: flex;
@@ -228,7 +228,7 @@ h1{
 .container-magasin .title4{
     /* border: #4A4A4A solid 1.5px; */
     width: 100%;
-    height: 6%;
+    /* height: 6%; */
     /* padding: 25px 10px;
      */
 }
@@ -236,15 +236,24 @@ h1{
     /* border: white 1.5px solid; */
     border-collapse: collapse;
     width: 100%;
-    height: 75%;
+    /* height: 75%; */
     background-color: #D2DEEF;
+    
+}
+.container-magasin .table-responsive{
+    height: 50vh;
+    width: 100%;
+    /* display: flex; */
+    /* border: white 1.5px solid; */
+    overflow: auto !important;
 }
 th, tr, td{
     border: white 1.5px solid;
-    text-align: center;
+    
     font-weight: bold;
 }
 thead tr{
+    text-align: center;
     background-color: #5B9BD5;
     color: #fff;
 }
@@ -257,33 +266,40 @@ tbody tr:nth-child(even){
 
 
 .editer {
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.editer div{
-    width: 90%;
+    /* height: 30%; */
+    /* display: flex; */
+    /* justify-content: space-around; */
+    text-align: center;
+    /* align-items: center; */
     /* border: #000 1px solid; */
-    height: 98%;
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    align-items: center;
+    padding: 15px;
 }
-.editer div a{
-    height: 100%;
-    width: 48%;
+/*.editer div{
+     width: 90%;  
+    border: #000 1px solid; 
+    height: 98%; 
+    display: flex;
+    /* justify-content: space-between; */
+    /* flex-wrap: wrap; */
+    /* align-items: center; 
+}*/
+.editer a{
+    /* height: 100%; */
+    width: 30%;
     font-weight: normal;
     color: #fff;
+    padding: 8px 15px;
     border-radius: 6px;
-    background-color: #009A9A;
+    /* background-color: #009A9A; */
 }
-.editer div a:nth-child(1){
+.editer a:nth-child(1){
     background-color: #FFC000;
+    margin-left: -7px;
+    margin-right: 5px;
 }
-.editer div a:nth-child(2){
+.editer a:nth-child(2){
     background-color: #FF0000;
+    margin-right: -7px;
 }
 /* MAGASIN.HTML */
 

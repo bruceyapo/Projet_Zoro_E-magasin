@@ -1,0 +1,46 @@
+{% extends "Partials/Base.html" %}
+{% block body %}
+    <section class="magasin">
+        <div id="container">
+            <div class="container-magasin">
+                <div class="ajoute"><a href="/Ajout_produit/"><button type="button" class="btn btn-success btn-lg">Ajouter</button></a></div>
+                <div class="title4"><h4>Liste des Produit</h4></div>
+                <div class="table-responsive">
+                    <table class=" tableau">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Nom</th>
+                                <th>Catégorie</th>
+                                <th>Prix</th>
+                                <th>Descrpition</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        
+                    <tbody>
+                        {% for list in list %}
+                        
+                            <tr>
+                                <td>{{list.IdProduit}}</td>
+                                <td>{{list.NomProduit}}</td>
+                                <td>{{list.CatProduit}}</td>
+                                <td>{{list.PrixUnitaire}}</td>
+                                <td>{{list.Descriptions}}</td>
+                                <td class="editer">
+                                    
+                                    <a href="/Modifier_produit/{{list.IdProduit}}">Modifier</a>
+                                    <a href="/Supprimer_produit/{{list.IdProduit}}">Supprimer</a>
+                                    
+                                </td>
+                            </tr>
+                        {%endfor%}
+                    </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+</section>      
+{% endblock %}
+            
+       

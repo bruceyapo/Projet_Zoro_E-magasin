@@ -1,0 +1,55 @@
+{% extends "Partials/Base.html" %}
+{% block body %}
+    <section class="ajouter">
+        <div id="container">
+            <div class="container-ajouter">
+                <div><h3>Ajouter un nouveau Produit</h3></div>
+                <form action="/Succes_ajout_produit/" method="post">
+                    
+                    <div class="mb-3 row">
+                        <label for="Name" class="col-sm-2 col-form-label">Nom :</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="NomProduit" id="Name">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="Categorie" class="col-sm-2 col-form-label">Catégorie :</label>
+                        <div class="col-sm-10">
+                            <select class="form-select" name="CatProduit" id="Categorie" required aria-label="select example">
+                                <option value="">----- Selectionnez une Catégorie-----</option>
+                                <option value="Electronique">Electronique</option>
+                                <option value="Electrique">Electrique</option>
+                                <option value="Aliment">Aliment</option>
+                                <option value="Vêtement">Vêtement</option>
+                            </select>
+                            <!-- <input type="text" class="form-control" name="CatProduit" id="Categorie"> -->
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="PrixUnitaire" class="col-sm-2 col-form-label">Prix :</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="PrixUnitaire" id="PrixUnitaire">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="Descrpition" class="col-sm-2 col-form-label">Descrpition:</label>
+                        <div class="col-sm-10">
+                            <textarea class="form-control" name="Descriptions" id="Descrpition" placeholder=""></textarea>
+                            <!-- <input type="text" class="form-control" name="Descriptions" id="Descrpition"> -->
+                        </div>
+                    </div>
+                    <div class="mb-3 row justify-content-center " style="width: 90%;">
+                        <div class="col-sm-10 column justify-content-center align-items-center ms-auto" style="width: 32%;">
+                            <button type="reset" class="btn btn-danger button"><a href="/List_produit/">Retour</a></button>
+                            <button type="submit" class="btn btn-success"> Valider</button>
+                        </div>
+        
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+            
+        
+    
