@@ -1,7 +1,6 @@
 {% extends "Partials/Base.html" %}
 {% block body %}
     <section class="magasin">
-        
         <div id="container">
             <div class="container-magasin">
                 {% with messages=get_flashed_messages(with_categories=true) %}
@@ -11,34 +10,37 @@
                         {%endfor%}
                     {%endif%}
                 {% endwith %}
-                <div class="ajoute"><a href="/Ajout_produit/"><button type="button" class="btn btn-success btn-lg">Ajouter</button></a></div>
-                <div class="title4"><h4>Liste des Produit</h4></div>
+                <div class="ajoute"><a href="/Ajout_stock/"><button type="button" class="btn btn-success btn-lg">Ajouter</button></a></div>
+                <div class="title4"><h4>Liste des Stocks</h4></div>
                 <div class="table-responsive">
                     <table class=" tableau">
                         <thead>
                             <tr>
                                 <th>Id</th>
-                                <th>Nom</th>
-                                <th>Catégorie</th>
-                                <th>Prix</th>
-                                <th>Descrpition</th>
+                                <th>Magasin</th>
+                                <th>Mail</th>
+                                <th>Produit</th>
+                                <th>Prix unitaire</th>
+                                <th>Quantité dispo</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         
                     <tbody>
+
                         {% for list in list %}
                         
                             <tr>
-                                <td>{{list.IdProduit}}</td>
+                                <td>{{list.Idstock}}</td>
+                                <td>{{list.NomMagasin}}</td>
+                                <td>{{list.Mail}}</td>
                                 <td>{{list.NomProduit}}</td>
-                                <td>{{list.CatProduit}}</td>
                                 <td>{{list.PrixUnitaire}}</td>
-                                <td>{{list.Descriptions}}</td>
+                                <td>{{list.Quantitestock}}</td>
                                 <td class="editer">
                                     
-                                    <a href="/Modifier_produit/{{list.IdProduit}}">Modifier</a>
-                                    <a href="/Supprimer_produit/{{list.IdProduit}}">Supprimer</a>
+                                    <a href="/Modifier_stock/{{list.Idstock}}">Modifier</a>
+                                    <a href="/Supprimer_stock/{{list.Idstock}}">Supprimer</a>
                                     
                                 </td>
                             </tr>
@@ -48,19 +50,20 @@
                 </div>
             </div>
         </div>
+
         <!-- Ajoutez le script JavaScript pour gérer la disparition du message -->
-    <script>
-        // Sélectionnez l'élément contenant le message flash
-        const flashMessage = document.getElementById('flash-message-secces');
-        
-        // Définissez un délai (en millisecondes) avant que le message ne disparaisse
-        const delay = 15000; // 15 secondes
-        
-        // Utilisez setTimeout pour masquer le message après le délai
-        setTimeout(function() {
-            flashMessage.style.display = 'none';
-        }, delay);
-    </script>
+        <script>
+            // Sélectionnez l'élément contenant le message flash
+            const flashMessage = document.getElementById('flash-message-secces');
+            
+            // Définissez un délai (en millisecondes) avant que le message ne disparaisse
+            const delay = 15000; // 15 secondes
+            
+            // Utilisez setTimeout pour masquer le message après le délai
+            setTimeout(function() {
+                flashMessage.style.display = 'none';
+            }, delay);
+        </script>
 </section>      
 {% endblock %}
             

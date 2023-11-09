@@ -3,7 +3,14 @@
     <section class="magasin">
         <div id="container">
             <div class="container-magasin">
-                <div class="ajoute"><a href="/Ajouter/"><button type="button" class="btn btn-success btn-lg">Ajouter</button></a></div>
+                {% with messages=get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        {% for category, message in messages %}
+                            <div class="alert alert-{{category}}" id="flash-message-secces"> {{message}} </div>
+                        {%endfor%}
+                    {%endif%}
+                {% endwith %}
+                <div class="ajoute"><a href="/Ajouter_magasin/"><button type="button" class="btn btn-success btn-lg">Ajouter</button></a></div>
                 <div class="title4"><h4>Liste des Magasin</h4></div>
                 <div class="table-responsive">
                     <table class=" tableau">
@@ -19,98 +26,55 @@
                         </thead>
                         
                     <tbody>
-                        <tr>
+
+                        {% for list in list %}
+                        
+                            <tr>
+                                <td>{{list.IdMagasin}}</td>
+                                <td>{{list.NomMagasin}}</td>
+                                <td>{{list.AdresseMagasin}}</td>
+                                <td>{{list.Telephone}}</td>
+                                <td>{{list.Mail}}</td>
+                                <td class="editer">
+                                    
+                                    <a href="/Modifier_magasin/{{list.IdMagasin}}">Modifier</a>
+                                    <a href="/Supprimer_magasin/{{list.IdMagasin}}">Supprimer</a>
+                                    
+                                </td>
+                            </tr>
+                        {%endfor%}
+                        <!-- <tr>
                             <td>1</td>
                             <td>Magasin 1</td>
                             <td>Adresse 1</td>
                             <td>Téléphone 1</td>
                             <td>E-Mail 1</td>
                             <td class="editer">
-                                <!-- <div> -->
-                                    <a href="/Modifier/">Modifier</a>
-                                    <a href="/Supprimer/">Supprimer</a>
-                                <!-- </div> -->
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Magasin 2</td>
-                            <td>Adresse 2</td>
-                            <td>Téléphone 2</td>
-                            <td>E-Mail 2</td>
-                            <td class="editer">
-                                    <a href="/Modifier/">Modifier</a>
-                                    <a href="/Supprimer/">Supprimer</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>Magasin 3</td>
-                            <td>Adresse 3</td>
-                            <td>Téléphone 3</td>
-                            <td>E-Mail 3</td>
-                            <td class="editer">
-                                    <a href="/Modifier/">Modifier</a>
-                                    <a href="/Supprimer/">Supprimer</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>4</td>
-                            <td>Magasin 4</td>
-                            <td>Adresse 4</td>
-                            <td>Téléphone 4</td>
-                            <td>E-Mail 4</td>
-                            <td class="editer">
-                            
+                               
                                     <a href="/Modifier/">Modifier</a>
                                     <a href="/Supprimer/">Supprimer</a>
                                 
                             </td>
-                        </tr>
-                        <tr>
-                            <td>5</td>
-                            <td>Magasin 5</td>
-                            <td>Adresse 5</td>
-                            <td>Téléphone 5</td>
-                            <td>E-Mail 5</td>
-                            <td class="editer">
-                            
-                                <a href="/Modifier/">Modifier</a>
-                                <a href="/Supprimer/">Supprimer</a>
-                            
-                            </td>
-                        </tr>
-                       <tr>
-                            <td>6</td>
-                            <td>Magasin 6</td>
-                            <td>Adresse 6</td>
-                            <td>Téléphone 6</td>
-                            <td>E-Mail 6</td>
-                            <td class="editer">
-                        
-                                    <a href="/Modifier/">Modifier</a>
-                                    <a href="/Supprimer/">Supprimer</a>
-                            
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>7</td>
-                            <td>Magasin 7</td>
-                            <td>Adresse 7</td>
-                            <td>Téléphone 7</td>
-                            <td>E-Mail 7d-ifè_orfaz/td>
-                            <td class="editer">
-                            
-                                    <a href="/Modifier/">Modifier</a>
-                                    <a href="/Supprimer/">Supprimer</a>
-                                
-                            </td>
-                        </tr> 
+                        </tr> -->
                     </tbody>
                     </table>
                 </div>
             </div>
         </div>
+
+        <!-- Ajoutez le script JavaScript pour gérer la disparition du message -->
+        <script>
+            // Sélectionnez l'élément contenant le message flash
+            const flashMessage = document.getElementById('flash-message-secces');
+            
+            // Définissez un délai (en millisecondes) avant que le message ne disparaisse
+            const delay = 15000; // 15 secondes
+            
+            // Utilisez setTimeout pour masquer le message après le délai
+            setTimeout(function() {
+                flashMessage.style.display = 'none';
+            }, delay);
+        </script>
 </section>      
 {% endblock %}
             

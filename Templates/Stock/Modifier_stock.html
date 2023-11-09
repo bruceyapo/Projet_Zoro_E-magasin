@@ -1,0 +1,57 @@
+{% extends "Partials/Base.html" %}
+{% block body %}
+    <section class="ajouter">
+        <div id="container">
+            <div class="container-ajouter">
+                <div><h3>Modifier un Produit</h3></div>
+                
+                <form action='{{url_for("Succes_modif_stock", Idstock = _id)}}' method="POST">
+                    <div class="mb-3 row">
+                        <label for="Quantitestock" class="col-sm-2 col-form-label">Quantité:</label>
+                        <div class="col-sm-10">
+                            {% for list in list %}
+                                <input type="text" class="form-control" name="Quantitestock" value="{{list.Quantitestock}}" id="Quantitestock">
+                            {%endfor%}
+                        </div>
+                    </div>
+                    
+                        <div class="mb-3 row">
+                            <label for="IdMagasin" class="col-sm-2 col-form-label">Magasin :</label>
+                            <div class="col-sm-10">
+                                <select class="form-select" name="IdMagasin" id="IdMagasin" required aria-label="select example">
+                                    {% for listMag in listMag %}
+                                    <option value="{{listMag.IdMagasin}}">{{listMag.NomMagasin}}</option>
+                                    <!-- <option value="{{list.CatProduit}}">Electronique</option> -->
+                                    <!-- <option value="{{list.CatProduit}}">Electrique</option> -->
+                                    <!-- <option value="{{list.CatProduit}}">Aliment</option> -->
+                                    <!-- <option value="{{list.CatProduit}}">Vêtement</option> -->
+                                    {%endfor%}
+                                </select>
+                            </div>
+                        </div>
+                    
+                    
+                    <div class="mb-3 row">
+                        <label for="IdProduit" class="col-sm-2 col-form-label">Produit:</label>
+                        <div class="col-sm-10">
+                            <select class="form-select" name="IdProduit" id="IdProduit" required aria-label="select example">
+                                {% for listPro in listPro %}
+                                <option value="{{listPro.IdProduit}}">{{listPro.NomProduit}}</option>
+                                {%endfor%}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="mb-3 row justify-content-center " style="width: 90%;">
+                        <div class="col-sm-10 column justify-content-center align-items-center ms-auto" style="width: 32%;">
+                            <button type="reset" class="btn btn-danger button"><a href="/Liste_tock/">Retour</a></button>
+                            <button type="submit" class="btn btn-success"> Valider</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+            
+        
+    

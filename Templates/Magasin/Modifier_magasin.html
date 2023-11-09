@@ -4,39 +4,40 @@
         <div id="container">
             <div class="container-ajouter">
                 <div><h3>Modifier un magasin</h3></div>
-                <form action="/Succes_modif/">
-                    
-                    <div class="mb-3 row">
-                        <label for="Name" class="col-sm-2 col-form-label">Nom :</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" name="NomMagasin" value="Magasin 5" id="Name">
+                <form action='{{url_for("Succes_modif_mag", IdMagasin = _id )}}' method="POST">
+                    {% for list in list %}
+                        <div class="mb-3 row">
+                            <label for="Name" class="col-sm-2 col-form-label">Nom :</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" name="NomMagasin" value="{{list.NomMagasin}}" id="Name">
+                            </div>
                         </div>
-                    </div>
-                    <div class="mb-3 row">
-                        <label for="Adresse" class="col-sm-2 col-form-label">Adresse :</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" name="AdresseMagasin" value="Adresse 5" id="Adresse">
+                        <div class="mb-3 row">
+                            <label for="Adresse" class="col-sm-2 col-form-label">Adresse :</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" name="AdresseMagasin" value="{{list.AdresseMagasin}}" id="Adresse">
+                            </div>
                         </div>
-                    </div>
-                    <div class="mb-3 row">
-                        <label for="tel" class="col-sm-2 col-form-label">Téléphone :</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" name="Telephone" style="color: #8FAF47;" value="Téléphone M" id="tel">
+                        <div class="mb-3 row">
+                            <label for="tel" class="col-sm-2 col-form-label">Téléphone :</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" name="Telephone" style="color: #8FAF47;" value="{{list.Telephone}}" id="tel">
+                            </div>
                         </div>
-                    </div>
-                    <div class="mb-3 row">
-                        <label for="text" class="col-sm-2 col-form-label">E-mail :</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" name="Mail" value="E-mail 5" id="email">
+                        <div class="mb-3 row">
+                            <label for="text" class="col-sm-2 col-form-label">E-mail :</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" name="Mail" value="{{list.Mail}}" id="email">
+                            </div>
                         </div>
-                    </div>
-                    <div class="mb-3 row justify-content-center " style="width: 90%;">
-                        <div class="col-sm-10 column justify-content-center align-items-center ms-auto" style="width: 32%;">
-                            <button type="reset" class="btn btn-danger button"><a href="/Magasin/">Retour</a></button>
-                            <button type="submit" class="btn btn-success"> Valider</button>
+                        <div class="mb-3 row justify-content-center " style="width: 90%;">
+                            <div class="col-sm-10 column justify-content-center align-items-center ms-auto" style="width: 32%;">
+                                <button type="reset" class="btn btn-danger button"><a href="/Magasin/">Retour</a></button>
+                                <button type="submit" class="btn btn-success"> Valider</button>
+                            </div>
+            
                         </div>
-        
-                    </div>
+                    {%endfor%}
                 </form>
             </div>
         </div>

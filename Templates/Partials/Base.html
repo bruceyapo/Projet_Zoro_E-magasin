@@ -16,14 +16,40 @@
     </head>
     <body>
         {% include './partials/header.html' %}
+        
         <div class="content">
             {% include './partials/navbar.html' %}
+            <!-- {% with messages=get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{category}}" id="flash-messages">
+                            <h2>{{message}}
+                                 {% for list in list %}  -->
+                                    <!-- <i>{{list.Nom}} {{list.Prenoms}} </i> -->
+                                <!-- {%endfor%} 
+                            </h2>
+                        </div>
+                    {%endfor%}
+                {%endif%}
+            {% endwith %} -->
             {% block body %}
                 
             {% endblock %}
         </div>
         
-        
+        <!-- <script>
+            // Sélectionnez l'élément contenant le message flash
+            const flashMessage = document.getElementById('flash-messages');
+            
+            // Définissez un délai (en millisecondes) avant que le message ne disparaisse
+            const delay = 20000; // 20 secondes
+            
+            // Utilisez setTimeout pour masquer le message après le délai
+            setTimeout(function() {
+                flashMessage.style.display = 'none';
+            }, delay);
+        </script> -->
+
         <script src="{{url_for('static', filename='/Js/bootstrap.bundle.min.js')}}" ></script>
     </body>
 </html>

@@ -7,49 +7,49 @@
                 
                 <form action='{{url_for("Succes_modif_prod", IdProduit = _id )}}' method="POST">
                     {% for list in list %}
-                    <div class="mb-3 row">
-                        <label for="Name" class="col-sm-2 col-form-label">Nom :</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" name="NomProduit" value="{{list.NomProduit}}" id="Name">
+                        <div class="mb-3 row">
+                            <label for="Name" class="col-sm-2 col-form-label">Nom :</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" name="NomProduit" value="{{list.NomProduit}}" id="Name">
+                            </div>
                         </div>
-                    </div>
-                    <div class="mb-3 row">
-                        <label for="Categorie" class="col-sm-2 col-form-label">Catégorie :</label>
-                        <div class="col-sm-10">
-                            <select class="form-select" name="CatProduit" id="Categorie" required aria-label="select example">
-                                <option value="{{list.CatProduit}}">{{list.CatProduit}}</option>
-                                <option value="{{list.CatProduit}}">Electronique</option>
-                                <option value="{{list.CatProduit}}">Electrique</option>
-                                <option value="{{list.CatProduit}}">Aliment</option>
-                                <option value="{{list.CatProduit}}">Vêtement</option>
-                            </select>
-                            <!-- <input type="text" class="form-control" name="Categorie" value="{{list.Categorie}}" id="Categorie"> -->
+                        <div class="mb-3 row">
+                            <label for="Categorie" class="col-sm-2 col-form-label">Catégorie :</label>
+                            <div class="col-sm-10">
+                                <select class="form-select" name="CatProduit" id="Categorie" required aria-label="select example">
+                                    <option value="{{list.CatProduit}}">{{list.CatProduit}}</option>
+                                    <option value="{{list.CatProduit}}">Electronique</option>
+                                    <option value="{{list.CatProduit}}">Electrique</option>
+                                    <option value="{{list.CatProduit}}">Aliment</option>
+                                    <option value="{{list.CatProduit}}">Vêtement</option>
+                                </select>
+                                <!-- <input type="text" class="form-control" name="Categorie" value="{{list.Categorie}}" id="Categorie"> -->
+                            </div>
                         </div>
-                    </div>
-                    <div class="mb-3 row">
-                        <label for="PrixUnitaire" class="col-sm-2 col-form-label">Prix :</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" name="PrixUnitaire" style="color: #8FAF47;" value="{{list.PrixUnitaire}}"  id="PrixUnitaire">
+                        <div class="mb-3 row">
+                            <label for="PrixUnitaire" class="col-sm-2 col-form-label">Prix :</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" name="PrixUnitaire" style="color: #8FAF47;" value="{{list.PrixUnitaire}}"  id="PrixUnitaire">
+                            </div>
                         </div>
-                    </div>
-                    <div class="mb-3 row">
-                        <label for="Descrpition" class="col-sm-2 col-form-label">Descrpition:</label>
-                        <div class="col-sm-10">
-                            <textarea class="form-control" name="Descriptions" value="{{list.Descriptions}}" id="Descrpition" placeholder=""></textarea>
+                        <div class="mb-3 row">
+                            <label for="Descrpition" class="col-sm-2 col-form-label">Descrpition:</label>
+                            <div class="col-sm-10">
+                                <textarea class="form-control" name="Descriptions" value="{{list.Descriptions}}" id="Descrpition" placeholder=""></textarea>
 
-                            <!-- <input type="text" class="form-control" name="Descriptions" value="{{list.Descriptions}}" id="Descrpition"> -->
+                                <!-- <input type="text" class="form-control" name="Descriptions" value="{{list.Descriptions}}" id="Descrpition"> -->
+                            </div>
                         </div>
-                    </div>
-                    <div class="mb-3 row justify-content-center " style="width: 90%;">
-                        <div class="col-sm-10 column justify-content-center align-items-center ms-auto" style="width: 32%;">
-                            <button type="reset" class="btn btn-danger button"><a href="/List_produit/">Retour</a></button>
-                            <button type="submit" class="btn btn-success"> Valider</button>
+                        <div class="mb-3 row justify-content-center " style="width: 90%;">
+                            <div class="col-sm-10 column justify-content-center align-items-center ms-auto" style="width: 32%;">
+                                <button type="reset" class="btn btn-danger button"><a href="/List_produit/">Retour</a></button>
+                                <button type="submit" class="btn btn-success"> Valider</button>
+                            </div>
+            
                         </div>
-        
-                    </div>
-                    
+                    {%endfor%}
+
                 </form>
-                {%endfor%}
             </div>
         </div>
     </section>
