@@ -1,66 +1,149 @@
-from flask import Flask, render_template, request,  redirect, url_for, flash
+from flask import Flask, render_template, request,  redirect, url_for, flash,jsonify
+from flask_bcrypt import Bcrypt
 import pyodbc  as odbccon
-
 app = Flask(__name__)
+
+bcrypt = Bcrypt(app)
+
 conn = odbccon.connect("Driver={ODBC Driver 17 for SQL Server};" 
                        "Server=DESKTOP-QQGKONI\SQLEXPRESS;" 
                        "Database=Zoro_E_magasin;" 
                        "Trusted_Connection=yes")
 # Authentification
-@app.route("/", methods=['GET'])
+@app.route("/")
 def Connexion():
     return render_template("Authentification/connexion.html")
 
 @app.route("/Succes_Connexion/", methods=['POST'])
 def Succes_Connexion():
-    cursor = conn.cursor()
+    
     E_mail = request.form["E_mail"]
     Mot_de_passe = request.form["Mot_de_passe"]
-    cursor.execute("SELECT E_mail, Mot_de_passe FROM Utilisateurs WHERE E_mail = ? and  Mot_de_passe = ?", (E_mail,Mot_de_passe))
-    list = cursor.fetchall()
-    conn.commit()
-    if len(list) == 0:
-        flash('connexion échoué! Vous avez certainement entré un e-mail ou mot de passe incorrect', 'danger')
-        return redirect(url_for('Connexion'))
-        
-    else:
-        flash(f"Succès! Bienvenue sur le site E-magazin ", 'success')
-        return redirect(url_for('index'))
+    cursor = conn.cursor()
+    cursor.execute(f"SELECT Id, E_mail, Mot_de_passe  FROM Utilisateurs WHERE E_mail = '{E_mail}'")
+    utilisateur = cursor.fetchone()
+    
+    if utilisateur:
+        # Vérification du mot de passe haché
+        if bcrypt.check_password_hash(utilisateur[2], Mot_de_passe):
+            # Authentification réussie
+            flash(f"Succès! Bienvenue sur le site E-magazin ", 'success')
+            print("succès admin")
+            return redirect(url_for('DashbordAdmin'))
+        elif utilisateur and bcrypt.check_password_hash(utilisateur[2], Mot_de_passe):
+            
+            flash(f"Succès! Bienvenue sur le site E-magazin ", 'success')
+            print("succes user")
+            return redirect(url_for('index'))
+        else:
 
+
+            # Mot de passe incorrect
+            print(Mot_de_passe)
+            print("Connexion echouée")
+            flash('connexion échoué! Vous avez certainement entré un e-mail ou mot de passe incorrect', 'danger')
+            return redirect(url_for('Connexion'))
+    else:
+        # Utilisateur non trouvé
+        flash('Utilisateur non trouvé!', 'danger')
+        return redirect(url_for('Connexion'))
 
 @app.route("/inscription/", methods=['GET'])
 def inscription():
     return render_template("Authentification/inscription.html")
 
-@app.route("/Succes_inscription/", methods=['POST'])
-def Succes_inscription():
+@app.route("/InscriptionStandatUser/", methods=['GET'])
+def InscriptionStandatUser():
+    return render_template("Authentification/InscriptionStandatUser.html")
 
+@app.route("/Succes_inscription/", methods=['POST', 'GET'])
+def Succes_inscription():
+    # Récupération des données du formulaire
+    if request.method == 'POST':
+        Nom = request.form["Nom"]
+        Prenoms = request.form["Prenoms"]
+        Ville = request.form["Ville"]
+        E_mail = request.form["E_mail"]
+        Mot_de_passe = 'request.form["Mot_de_passe"]'
+        Roles = request.form["Roles"]
+    # Hachage du mot de passe
+    mot_de_passe_hache = bcrypt.generate_password_hash(Mot_de_passe).decode('utf-8')
+    list = {
+        "Nom": Nom,
+        "Prenoms": Prenoms,
+        "Ville": Ville,
+        "E_mail": E_mail,
+        "Mot_de_passe" : mot_de_passe_hache,
+        "Roles" : Roles
+    }
+    cursor = conn.cursor()
+    cursor.execute(
+        f"INSERT INTO Utilisateurs (Nom, Prenoms, Ville, E_mail, Mot_de_passe, Roles) VALUES ('{Nom}', '{Prenoms}', '{Ville}', '{E_mail}', '{mot_de_passe_hache}', '{Roles}')"
+    )
+
+    # Commit des modifications
+    conn.commit()
+    flash('Inscription réussie! Connectez-vous maintenant.', 'success')
+    return redirect(url_for('Connexion',list=list))
+
+# Authentification
+@app.route("/DashbordAdmin/")
+def DashbordAdmin():
+    # Exécution de la requête de sélection
+    cursor = conn.cursor()
+    cursor.execute( "SELECT Id, Nom, Prenoms, Ville, E_mail, Roles FROM Utilisateurs ")
+    list = cursor.fetchall()
+    # Commit des modifications
+    conn.commit()
+    # conn.close()
+    return render_template("Partials/DashbordAdmin.html", list=list)
+
+@app.route("/Modif_user/<int:Id>", methods=['GET', 'POST'])
+def Modif_user(Id):
+    _id = int(Id)
+    cursor = conn.cursor()
+    cursor.execute( "SELECT * FROM Utilisateurs WHERE Id = ?", _id)
+    list = cursor.fetchall() 
+    conn.commit()  
+    return render_template("Partials/Modif_user.html", list=list, _id=_id)
+
+@app.route("/Succes_modif_user/<int:Id>", methods=['GET', 'POST'])
+def Succes_modif_user(Id):
+    _id = int(Id)
      # cursor = conn.cursor()
     # Récupération des données du formulaire
     Nom = request.form["Nom"]
     Prenoms = request.form["Prenoms"]
     Ville = request.form["Ville"]
     E_mail = request.form["E_mail"]
-    Mot_de_passe = request.form["Mot_de_passe"]
+    Roles = request.form["Roles"]
     # Traitement des données
-    list = {
-        "Nom": Nom,
-        "Prenoms": Prenoms,
-        "Ville": Ville,
-        "E_mail": E_mail,
-        "Mot_de_passe" : Mot_de_passe
-    }
     cursor = conn.cursor()
-    cursor.execute(
-        f"INSERT INTO Utilisateurs (Nom, Prenoms, Ville, E_mail, Mot_de_passe) VALUES ('{list['Nom']}', '{list['Prenoms']}', '{list['Ville']}', '{list['E_mail']}', '{list['Mot_de_passe']}')"
-    )
-
-    # Commit des modifications
+    cursor.execute( 
+        "UPDATE Utilisateurs SET Nom =?, Prenoms =?, Ville =?, E_mail =?, Roles =? WHERE Id=?",
+        (Nom,Prenoms,Ville, E_mail, Roles, _id))
     conn.commit()
+    # cursor.close()
+    flash(f"Utilisateurs modifier avec succès!", 'warning')
+    return redirect(url_for('DashbordAdmin', _id=_id))
 
-    return redirect(url_for('Connexion'))
+@app.route("/Supp_user/<int:Id>", methods=['GET', 'POST'])
+def Supp_user(Id):
+    _id = int(Id)
+    cursor = conn.cursor()
+    cursor.execute( "SELECT * FROM Utilisateurs WHERE Id = ?", _id)
+    list = cursor.fetchall() 
+    conn.commit()  
+    return render_template("Partials/Supp_user.html", list=list, _id=_id)
 
-# Authentification
+@app.route("/Succes_supp_user/<int:Id>", methods=['GET', 'POST'])
+def Succes_supp_user(Id):
+    _id = int(Id)
+    cursor = conn.cursor()
+    cursor.execute(f"DELETE FROM Utilisateurs WHERE Id = ?", (_id,))
+    conn.commit()
+    flash("Utilisateurs Supprimer avec succès!", 'danger')
+    return redirect(url_for('DashbordAdmin', _id=_id))
 
 @app.route("/Accueil/")
 def index():
@@ -378,6 +461,7 @@ def Succes_supp_stock(Idstock):
     flash(f"Stock Supprimer avec succès!", 'danger')
     return redirect(url_for('Stock', _id=_id))
 # Stock 
+
 if __name__ == "__main__":
     app.secret_key= 'admin123'
     app.run(debug=True)

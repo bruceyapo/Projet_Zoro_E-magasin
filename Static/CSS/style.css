@@ -58,7 +58,7 @@ ul{
 }
 .menu .navigation{
     /* border: blue solid 2px; */
-    height: 35%;
+    height: 45%;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -229,8 +229,15 @@ h1{
     /* align-items: center; */
     justify-items: center;
     /* border: #000 1px solid; */
-
-
+}
+.container-magasin .bout{
+    display: flex;
+    justify-content: space-between;
+}
+.container-magasin .bout .ajoutinscription
+{
+    display: flex;
+    justify-content: end;
 }
 .container-magasin .ajoute a{
     display: flex;

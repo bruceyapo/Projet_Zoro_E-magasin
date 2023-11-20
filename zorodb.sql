@@ -13,12 +13,15 @@ Nom VARCHAR(15) NOT NULL,
 Prenoms VARCHAR(30) NOT NULL,
 Ville VARCHAR(30) NOT NULL, 
 E_mail VARCHAR(30) NOT NULL unique,
-Mot_de_passe VARCHAR(20) NOT NULL
+Mot_de_passe VARCHAR(255) NOT NULL
 );
+ALTER TABLE Utilisateurs
+ADD Roles varchar(20)
+
 select * from Utilisateurs
-delete from Produit where IdProduit>14
+delete from Utilisateurs
 Truncate table Utilisateurs
-drop table Produit
+drop table Utilisateurs
 
 CREATE TABLE Magasin(
 IdMagasin INT NOT NULL PRIMARY KEY IDENTITY(1,1),

@@ -1,0 +1,74 @@
+{% extends "./partials/Base.html" %}
+
+{% block body %}
+
+    <section class="magasin">
+        
+        <div id="container">
+            <div class="container-magasin">
+                {% with messages=get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        {% for category, message in messages %}
+                            <div class="alert alert-{{category}}" id="flash-message-secces"> {{message}} </div>
+                        {%endfor%}
+                    {%endif%}
+                {% endwith %}
+                <div class="bout">
+                    <div class="ajoutinscription"><a href="/inscription/"><button type="button" class="btn btn-success btn-lg">Ajouter un administrateur</button></a></div>
+                    <div class=""><a href="/InscriptionStandatUser/"><button type="button" class="btn btn-info btn-lg">Ajouter un simple utilisateur</button></a></div>
+                </div>  
+                <div class="title4"><h4>Liste des utilisateurs</h4></div>
+                <div class="table-responsive">
+                    <table class=" tableau">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Nom</th>
+                                <th>Prenoms</th>
+                                <th>Ville</th>
+                                <th>Mail</th>
+                                <th>Role</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        
+                    <tbody>
+                        {% for list in list %}
+                        
+                            <tr>
+                                <td>{{list.Id}}</td>
+                                <td>{{list.Nom}}</td>
+                                <td>{{list.Prenoms}}</td>
+                                <td>{{list.Ville}}</td>
+                                <td>{{list.E_mail}}</td>
+                                <td>{{list.Roles}}</td>
+                                <td class="editer">
+                                    
+                                    <a href="/Modif_user/{{list.Id}}">Modifier</a>
+                                    <a href="/Supp_user/{{list.Id}}">Supprimer</a>
+                                    
+                                </td>
+                            </tr>
+                        {%endfor%}
+                    </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- Ajoutez le script JavaScript pour gérer la disparition du message -->
+    <script>
+        // Sélectionnez l'élément contenant le message flash
+        const flashMessage = document.getElementById('flash-message-secces');
+        
+        // Définissez un délai (en millisecondes) avant que le message ne disparaisse
+        const delay = 15000; // 15 secondes
+        
+        // Utilisez setTimeout pour masquer le message après le délai
+        setTimeout(function() {
+            flashMessage.style.display = 'none';
+        }, delay);
+    </script>
+</section>      
+{% endblock %}
+            
+       

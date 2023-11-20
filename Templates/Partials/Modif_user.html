@@ -18,35 +18,37 @@
         <div class="container-inscription">
             <div class="form_inscrip">
                 <h2 class="title">Inscrivez-vous</h2>
-                <form class="formulaire" action="{{url_for('Succes_inscription')}}" method="post">
+                <form class="formulaire" action="{{url_for('Succes_modif_user', Id = _id)}}" method="post">
+                {% for list in list %}
                     <div class="row">
                         <div class="mb-3 col-md-6">
-                            <input type="text" name="Nom" class="form-control" placeholder="Nom de famille">
+                            <input type="text" name="Nom" value="{{list.Nom}}" class="form-control" placeholder="Nom de famille">
                         </div>
     
                         <div class="mb-3 col-md-6">
-                            <input type="text" name="Prenoms" class="form-control" placeholder="Prénoms">
+                            <input type="text" name="Prenoms" value="{{list.Prenoms}}" class="form-control" placeholder="Prénoms">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-6">
-                            <input type="text" name="Ville" class="form-control" placeholder="Ville">
+                            <input type="text" name="Ville" value="{{list.Ville}}" class="form-control" placeholder="Ville">
                         </div>
                         <div class="col-md-6">
                             <select class="form-select" name="Roles" required aria-label="select example">
-                                <option value="Admin">Admin</option>
+                                <option value="{{list.Roles}}">{{list.Roles}}</option>
                             </select>
                         </div>
                     </div>
                     <div class="row">
                         <div class="mb-3 col-md-6">
-                            <input type="email" name="E_mail" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+                            <input type="email" name="E_mail" value="{{list.E_mail}}" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
                         </div>
                         <div class="mb-3 col-md-6">
-                            <input type="password" name="Mot_de_passe" class="form-control" placeholder="Mot de passe" aria-describedby="passwordHelpBlock">
+                            <input type="password" name="Mot_de_passe" value="{{list.Mot_de_passe}}" class="form-control" placeholder="Mot de passe" aria-describedby="passwordHelpBlock">
                         </div>
                     </div>
-                    <input type="submit" value="Envoyer ">   
+                    <input type="submit" value="Envoyer "> 
+                {%endfor%}  
                 </form>
                 <a href="/"><u>Déià un compte ? Connecter-vous</u></a>
             </div>
